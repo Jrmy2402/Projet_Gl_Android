@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">VMRS</string>
+    <string name="str_mail">Adresse E-mail</string>
+    <string name="str_pwd">Mot de Passe</string>
+    <string name="str_connect">Connexion</string>
+    <string name="menu_about">A propos</string>
+    <string name="menu_unconnect">Déconnexion</string>
+    <string name="menu_refresh">Actualiser</string>
+    <string name="str_return">Retour</string>
+    <string name="url">http://www.facebook.com</string>
+</resources>
