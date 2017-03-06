@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+import io.socket.engineio.client.transports.WebSocket;
 
 
 public class InfosActivity extends AppCompatActivity {
@@ -45,21 +46,9 @@ public class InfosActivity extends AppCompatActivity {
     SharedPreferences pref;
     String token;
     String id;
-    private Boolean isConnected = true;
-
+    private Boolean isConnected = false;
     private Socket socket;
-    {
-        try{
-            IO.Options opts = new IO.Options();
-            opts.forceNew = true;
-            opts.query = "token=" + token;
-            //opts.path = "/sock";
-            socket = IO.socket("http://172.31.1.25:9000/", opts);
-            System.out.println("Socket configuré");
-        } catch (URISyntaxException e){
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,20 +58,24 @@ public class InfosActivity extends AppCompatActivity {
         pref = getSharedPreferences("AppPref", MODE_PRIVATE);
         token = pref.getString("token","");
 
+        try{
+            IO.Options opts = new IO.Options();
+            //opts.forceNew = true;
+            opts.query = "token=" + token;
+            //opts.path = "/sock";
+            socket = IO.socket("http://172.31.1.25:9000/", opts);
+            System.out.println("Socket configuré");
+        } catch (URISyntaxException e){
+            throw new RuntimeException(e);
+        }
 
         socket.on(Socket.EVENT_CONNECT,onConnect);
         socket.on(Socket.EVENT_DISCONNECT,onDisconnect);
         socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
         socket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
+        socket.on("infoVm", onNewData);
         socket.connect();
 
-        socket.on("foo", new Emitter.Listener() {
-            @Override
-            public void call (Object... args) {
-                JSONObject obj = (JSONObject) args[0];
-                System.out.println(obj);
-            }
-        });
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -206,28 +199,44 @@ public class InfosActivity extends AppCompatActivity {
         socket.off(Socket.EVENT_DISCONNECT, onDisconnect);
         socket.off(Socket.EVENT_CONNECT_ERROR, onConnectError);
         socket.off(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
+        socket.off("Data In", onNewData);
     }
 
 
-    /*public Socket getSocket() {
-        return socket;
-    }*/
+    private Emitter.Listener onNewData = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    System.out.println(data);
+
+                }
+            });
+        }
+    };
 
     private Emitter.Listener onConnect = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            System.out.println("onCOnnect");
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //System.out.println("onCOnnect");
                     System.out.println(isConnected);
-                    if(!isConnected) {
-                        System.out.println(token);
-                        if(null!=token)
-                            System.out.println("ID : " + id);
-                            socket.emit("statsVm", id);
+                    if (!isConnected) {
+                        //System.out.println(token);
+                        if (null != token)
+                            //System.out.println("ID : " + id);
+                        socket.emit("statsVm", id);
                         System.out.println("Socket connecté");
                         Toast.makeText(getApplicationContext(),
                                 "Socket Connecté", Toast.LENGTH_LONG).show();
                         isConnected = true;
                     }
+                }
+            });
         }
 
     };
