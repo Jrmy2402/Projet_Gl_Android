@@ -1,20 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_infos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fr.isen.vmrs.InfosActivity">
+    android:fitsSystemWindows="true"
+    tools:context="fr.isen.vmrs.ListActivity">
 
-    <Button
-        android:text="@string/str_return"
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/return_button" />
-</RelativeLayout>
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            android:weightSum="1">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichName"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/FixedText"
+            android:layout_below="@+id/logoVM"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="@string/str_return"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/return_button" />
+
+        <ImageView
+            android:id="@+id/logoVM"
+            android:layout_width="100dp"
+            android:visibility="visible"
+            android:layout_height="100dp"
+            android:layout_marginTop="52dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_below="@id/AffichName"
+            android:layout_centerHorizontal="true"
+            android:layout_height="30dp"
+            android:id="@+id/space"/>
+
+        <TextView
+            android:text="Adresse : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagIP" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space"
+            android:layout_toRightOf="@+id/TagIP"
+            android:id="@+id/AffichIP"
+            android:layout_width="match_parent"
+            android:layout_toEndOf="@+id/TagIP" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_below="@+id/TagIP"
+            android:id="@+id/space2"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="OS : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space2"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagOS" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichOS"
+            android:layout_below="@+id/space2"
+            android:layout_toEndOf="@+id/TagOS" />
+        <!--info, date -->
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_below="@+id/TagOS"
+            android:id="@+id/space3"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Applications : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space3"
+            android:layout_alignBottom="@+id/AffichApps"
+            android:layout_alignTop="@+id/AffichApps"
+            android:id="@+id/TagApps" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichApps"
+            android:layout_below="@+id/space3"
+            android:layout_toEndOf="@+id/TagApps" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_below="@+id/TagApps"
+            android:id="@+id/space4"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Infos : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space4"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagInfos" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichInfos"
+            android:layout_below="@+id/space4"
+            android:layout_toEndOf="@+id/TagInfos" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_below="@+id/TagInfos"
+            android:id="@+id/space5"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Date de création : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space5"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagDate" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichDate"
+            android:layout_below="@+id/space5"
+            android:layout_toEndOf="@+id/TagDate" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="3dp"
+            android:layout_alignStart="@id/return_button"
+            android:layout_alignEnd="@id/return_button"
+            android:layout_above="@id/return_button">
+
+            <Button
+                android:text="Démarrer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_weight="1"
+                android:background="@color/greenButton"
+                android:id="@+id/buttonON"
+                />
+
+            <Button
+                android:text="Eteindre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="1"
+                android:background="@color/redButton"
+                android:id="@+id/buttonOFF" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

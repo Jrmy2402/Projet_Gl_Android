@@ -75,5 +75,13 @@
         android:layout_above="@+id/textMail"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:text="@string/str_site"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/siteText"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
