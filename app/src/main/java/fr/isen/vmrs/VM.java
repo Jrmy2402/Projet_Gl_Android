@@ -1,6 +1,6 @@
 package fr.isen.vmrs;
 
-
+//classe VM contenant toutes les informations sur une VM
 public class VM {
     private String ID;
     private String IP;

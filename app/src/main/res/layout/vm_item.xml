@@ -29,12 +29,12 @@
 
 
     <TextView
-        android:text="OS"
+        android:text="Etat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/avatar"
         android:layout_alignParentRight="true"
-        android:id="@+id/osVM" />
+        android:id="@+id/infoVM" />
 
     <TextView
         android:text="ip:Port"

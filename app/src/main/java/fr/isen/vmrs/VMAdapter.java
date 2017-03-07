@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-
+//Classe permettant la mise en forme des VMs dans la listview
 public class VMAdapter extends BaseAdapter {
     List<VM> vms;
     LayoutInflater inflater;
@@ -43,7 +43,7 @@ public class VMAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.vm_item,null);
             holder.setNomView((TextView)convertView.findViewById(R.id.nameVM));
             holder.setIPView((TextView)convertView.findViewById(R.id.ipVM));
-            holder.setOSView((TextView)convertView.findViewById(R.id.osVM));
+            holder.setInfoView((TextView)convertView.findViewById(R.id.infoVM));
             holder.setImageView((ImageView)convertView.findViewById(R.id.avatar));
             convertView.setTag(holder);
         }
@@ -53,7 +53,7 @@ public class VMAdapter extends BaseAdapter {
             holder.setIP(vms.get(position).getIP() + ":" + vms.get(position).getPort());
         }else holder.setIP("");
 
-        holder.setOS(vms.get(position).getOS());
+        holder.setEtat(vms.get(position).getInfo());
         /*if (vms.get(position).getName().equalsIgnoreCase("Debian")) {
             holder.setImage(R.drawable.debian);
         } else if (vms.get(position).getName().equalsIgnoreCase("Ubuntu")) {

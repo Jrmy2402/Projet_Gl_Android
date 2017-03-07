@@ -32,8 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="16dp"
-        android:paddingLeft="64dp"
-        android:paddingRight="64dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:paddingTop="16dp">
 
         <TextView
@@ -82,12 +82,11 @@
             android:layout_below="@+id/space"
             android:layout_toRightOf="@+id/TagIP"
             android:id="@+id/AffichIP"
-            android:layout_width="match_parent"
-            android:layout_toEndOf="@+id/TagIP" />
+            android:layout_width="match_parent" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="12dp"
+            android:layout_height="6dp"
             android:layout_below="@+id/TagIP"
             android:id="@+id/space2"
             android:layout_alignParentStart="true" />
@@ -110,70 +109,174 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="12dp"
+            android:layout_height="6dp"
             android:layout_below="@+id/TagOS"
             android:id="@+id/space3"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:text="Applications : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/space3"
-            android:layout_alignBottom="@+id/AffichApps"
-            android:layout_alignTop="@+id/AffichApps"
-            android:id="@+id/TagApps" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/AffichApps"
-            android:layout_below="@+id/space3"
-            android:layout_toEndOf="@+id/TagApps" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:layout_below="@+id/TagApps"
-            android:id="@+id/space4"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:text="Infos : "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/space4"
-            android:layout_alignParentStart="true"
-            android:id="@+id/TagInfos" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/AffichInfos"
-            android:layout_below="@+id/space4"
-            android:layout_toEndOf="@+id/TagInfos" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:layout_below="@+id/TagInfos"
-            android:id="@+id/space5"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:text="Date de création : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/space5"
-            android:layout_alignParentStart="true"
+            android:layout_below="@+id/space3"
             android:id="@+id/TagDate" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/AffichDate"
+            android:layout_toEndOf="@+id/TagDate"
+            android:layout_below="@+id/space3"
+            android:layout_alignParentEnd="true" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@+id/TagDate"
+            android:id="@+id/space4"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Applications: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space4"
+            android:layout_alignBottom="@+id/AffichApps"
+            android:layout_alignTop="@+id/AffichApps"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagApps"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichApps"
+            android:layout_below="@+id/space4"
+            android:layout_toEndOf="@+id/TagApps"
+            android:visibility="invisible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@+id/TagApps"
+            android:id="@+id/space5"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Etat : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/space5"
-            android:layout_toEndOf="@+id/TagDate" />
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagInfos"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichInfos"
+            android:layout_below="@+id/space5"
+            android:layout_toEndOf="@+id/TagInfos"
+            android:visibility="invisible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@+id/TagInfos"
+            android:id="@+id/space6"
+            android:layout_alignParentStart="true"
+            android:visibility="invisible" />
+
+        <TextView
+            android:text="CPU : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space6"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagCPU"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichCPU"
+            android:layout_below="@+id/space6"
+            android:layout_toEndOf="@+id/TagCPU"
+            android:visibility="invisible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@+id/TagCPU"
+            android:id="@+id/space7"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Mémoire : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space7"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagMemory"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichMemory"
+            android:layout_below="@+id/space7"
+            android:layout_toEndOf="@+id/TagMemory"
+            android:visibility="invisible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@+id/TagMemory"
+            android:id="@+id/space8"
+            android:layout_alignParentStart="true"
+            android:visibility="invisible" />
+
+        <TextView
+            android:text="Réseau : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space8"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagNetwork"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichNetwork"
+            android:layout_below="@+id/space8"
+            android:layout_toEndOf="@+id/TagNetwork"
+            android:visibility="invisible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_below="@+id/TagNetwork"
+            android:id="@+id/space9"
+            android:layout_alignParentStart="true"
+            android:visibility="invisible" />
+
+        <TextView
+            android:text="Block : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/space9"
+            android:layout_alignParentStart="true"
+            android:id="@+id/TagBlock"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AffichBlock"
+            android:layout_below="@+id/space9"
+            android:layout_toEndOf="@+id/TagBlock"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,6 +308,8 @@
 
 
         </LinearLayout>
+
+
 
     </RelativeLayout>
 

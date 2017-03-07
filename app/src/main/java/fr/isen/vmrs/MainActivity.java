@@ -8,11 +8,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +75,7 @@ public class MainActivity extends Activity {
         });
     }
 
+    //Connexion au serveur, recupere un token
     private class AsyncLogin extends AsyncTask<String, String, String>
     {
 

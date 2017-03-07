@@ -38,6 +38,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        //On ajoute la toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Display icon in the toolbar
@@ -47,12 +48,14 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mListView = (ListView) findViewById(R.id.listView);
 
+        //Recuperation du token
         pref = getSharedPreferences("AppPref", MODE_PRIVATE);
         token = pref.getString("token","");
         //System.out.println("Token : " + token);
 
         new AsyncLogin().execute();
 
+        //Gestion de la Listview
         VMAdapter adapter = new VMAdapter(this,ListVM);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);
@@ -61,22 +64,25 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         VM vmselect = (VM) mListView.getItemAtPosition(position);
-        Intent infoIntent = new Intent(ListActivity.this, InfosActivity.class);
-        Bundle bundle = new Bundle();
 
-        bundle.putString("name",vmselect.getName());
-        bundle.putString("id",vmselect.getID());
-        bundle.putString("os",vmselect.getOS());
-        bundle.putString("ip",vmselect.getIP());
-        bundle.putString("date",vmselect.getAdDate());
-        bundle.putString("info",vmselect.getInfo());
-        bundle.putInt("port",vmselect.getPort());
-        bundle.putStringArray("apps",vmselect.getApps());
-        bundle.putInt("image",vmselect.getImage());
-        //name,os,ip,date,info,port,apps,image
-        infoIntent.putExtras(bundle);
-        startActivity(infoIntent);
+        //Si la VM n'est pas en Loading on envoie les infos et lance l'activité suivante
+        if (!vmselect.getInfo().equalsIgnoreCase("Loading")) {
+            Intent infoIntent = new Intent(ListActivity.this, InfosActivity.class);
+            Bundle bundle = new Bundle();
 
+            bundle.putString("name", vmselect.getName());
+            bundle.putString("id", vmselect.getID());
+            bundle.putString("os", vmselect.getOS());
+            bundle.putString("ip", vmselect.getIP());
+            bundle.putString("date", vmselect.getAdDate());
+            //bundle.putString("info", vmselect.getInfo());
+            bundle.putInt("port", vmselect.getPort());
+            //bundle.putStringArray("apps",vmselect.getApps());
+            bundle.putInt("image", vmselect.getImage());
+            //name,os,ip,date,info,port,apps,image
+            infoIntent.putExtras(bundle);
+            startActivity(infoIntent);
+        } else Toast.makeText(ListActivity.this, "VM non disponible pour le moment", Toast.LENGTH_LONG).show();
     }
 
     //On ajoute le menu à l'appbar
@@ -87,6 +93,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
+    //Gestion de la selection dans la barre de menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -126,19 +133,6 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-
-    /*public void callDownloadTask() {
-        new DownloadTask(new DownloadTask.AsyncResponse(){
-            @Override
-            public void processFinish(List<VM> result){
-                ListVM = result;
-                //System.out.println(ListVM.size());
-                VMAdapter adapter = new VMAdapter(ListActivity.this,ListVM);
-                mListView.setAdapter(adapter);
-            }
-        }).execute(token);
-
-    }*/
 
     // Connexion au serveur, methode GET
     private class AsyncLogin extends AsyncTask<String, String, String>
@@ -303,6 +297,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
                 use sharedPreferences of Android. and logout button to clear sharedPreferences.
                  */
 
+                //On remplie la listview
                 VMAdapter adapter = new VMAdapter(ListActivity.this,ListVM);
                 mListView.setAdapter(adapter);
 

@@ -23,11 +23,6 @@
             app:titleTextAppearance="@style/Toolbar.TitleText"
             android:weightSum="1">
 
-            <!--ImageView
-                android:layout_width="46dp"
-                android:id="@+id/icon"
-                android:src="@mipmap/ic_vmrs"
-                android:layout_height="match_parent" /-->
 
         </android.support.v7.widget.Toolbar>
 
