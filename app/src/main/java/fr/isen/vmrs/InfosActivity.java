@@ -1,7 +1,9 @@
 package fr.isen.vmrs;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -43,6 +48,8 @@ public class InfosActivity extends AppCompatActivity {
     TextView TagCPU;
     TextView TagNetwork;
     TextView TagBlock;
+    Button StartVM;
+    Button StopVM;
     Space Space2;
     Space Space3;
     Space Space4;
@@ -129,6 +136,8 @@ public class InfosActivity extends AppCompatActivity {
         Space9 = (Space) findViewById(R.id.space9);
 
         Back = (Button) findViewById(R.id.return_button);
+        StartVM = (Button) findViewById(R.id.buttonON);
+        StopVM = (Button) findViewById(R.id.buttonOFF);
         Logo = (ImageView) findViewById(R.id.logoVM);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -198,6 +207,22 @@ public class InfosActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        StartVM.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                new AsyncLogin().execute("start");
+            }
+        });
+
+        StopVM.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                new AsyncLogin().execute("stop");
             }
         });
     }
@@ -392,5 +417,92 @@ public class InfosActivity extends AppCompatActivity {
             });
         }
     };
+
+    // Commande Start/Stop VM, methode GET
+    private class AsyncLogin extends AsyncTask<String, String, String> {
+
+        ProgressDialog pdLoading = new ProgressDialog(InfosActivity.this);
+        HttpURLConnection conn;
+        URL url = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //this method will be running on UI thread
+            pdLoading.setMessage("\tLoading...");
+            pdLoading.setCancelable(false);
+            pdLoading.show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                // Enter URL address where your php file resides
+                if (params[0].equalsIgnoreCase("start")) {
+                    url = new URL("http://172.31.1.25:9000/api/users/meVmStart/" + id);
+                } else if (params[0].equalsIgnoreCase("stop")) {
+                    url = new URL("http://172.31.1.25:9000/api/users/meVmStop/" + id);
+                }
+
+                // Setup HttpURLConnection class to send and receive data from server
+                conn = (HttpURLConnection) url.openConnection();
+                //conn.setRequestProperty("Content-Type","application/json");
+                conn.setRequestProperty("Authorization", "Bearer " + token);
+                conn.setRequestMethod("GET");
+
+
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+                return "exception";
+            }
+            try {
+
+                int response_code = conn.getResponseCode();
+                System.out.println("CODE ? " + response_code);
+
+                if (response_code == HttpURLConnection.HTTP_OK) {
+                    return ("success");
+                } else return("unsuccessful");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "exception";
+            } finally {
+                conn.disconnect();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            //this method will be running on UI thread
+
+            pdLoading.dismiss();
+
+            if(result.equalsIgnoreCase("success"))
+            {
+                /* Here launching another activity when login successful. If you persist login state
+                use sharedPreferences of Android. and logout button to clear sharedPreferences.
+                 */
+
+                Toast.makeText(InfosActivity.this, "Etat changé", Toast.LENGTH_LONG).show();
+
+            }else if (result.equalsIgnoreCase("unsuccessful")){
+
+                // If username and password does not match display a error message
+                Toast.makeText(InfosActivity.this, "Impossible d'éxécuter cette commande", Toast.LENGTH_LONG).show();
+
+            } else if (result.equalsIgnoreCase("exception")) {
+
+                Toast.makeText(InfosActivity.this, "Problème de serveur.", Toast.LENGTH_LONG).show();
+
+            }
+        }
+
+    }
 
 }
