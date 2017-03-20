@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://172.31.1.25:9000/auth/local");
+                url = new URL("http://172.31.1.25:80/auth/local");
                 //url = new URL("http://10.0.2.2:9000/auth/local");
 
             } catch (MalformedURLException e) {

@@ -79,7 +79,7 @@ public class InfosActivity extends AppCompatActivity {
         try {
             IO.Options opts = new IO.Options();
             opts.query = "token=" + token;
-            socket = IO.socket("http://172.31.1.25:9000/", opts);
+            socket = IO.socket("http://172.31.1.25:80/", opts);
             System.out.println("Socket configuré");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
@@ -444,9 +444,9 @@ public class InfosActivity extends AppCompatActivity {
 
                 // Enter URL address where your php file resides
                 if (params[0].equalsIgnoreCase("start")) {
-                    url = new URL("http://172.31.1.25:9000/api/users/meVmStart/" + id);
+                    url = new URL("http://172.31.1.25:80/api/users/meVmStart/" + id);
                 } else if (params[0].equalsIgnoreCase("stop")) {
-                    url = new URL("http://172.31.1.25:9000/api/users/meVmStop/" + id);
+                    url = new URL("http://172.31.1.25:80/api/users/meVmStop/" + id);
                 }
 
                 // Setup HttpURLConnection class to send and receive data from server

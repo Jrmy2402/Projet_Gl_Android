@@ -164,7 +164,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
             try {
 
                 // Enter URL address where your php file resides
-                url = new URL("http://172.31.1.25:9000/api/users/meVm");
+                url = new URL("http://172.31.1.25:80/api/users/meVm");
                 //url = new URL("http://10.0.2.2:9000/api/users/meVm");
 
 
