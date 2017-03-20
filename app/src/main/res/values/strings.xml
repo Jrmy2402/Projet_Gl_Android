@@ -7,6 +7,6 @@
     <string name="menu_unconnect">Déconnexion</string>
     <string name="menu_refresh">Actualiser</string>
     <string name="str_return">Retour</string>
-    <string name="url">http://172.31.1.25:4200</string>
+    <string name="url">http://172.31.1.25:80</string>
     <string name="str_site"><u>Site Web</u></string>
 </resources>
