@@ -19,10 +19,12 @@ public class VM {
         this.Port = Port;
         this.Name = Name;
 
-        if (this.Name.equalsIgnoreCase("Debian")) {
+        if (this.Name.indexOf("Debian") != -1) {
             Image=R.drawable.debian;
-        } else if (this.Name.equalsIgnoreCase("Ubuntu")) {
+        } else if (this.Name.indexOf("Ubuntu") != -1) {
             Image=R.drawable.ubuntu;
+        } else {
+            Image=R.drawable.otheros;
         }
     }
 
