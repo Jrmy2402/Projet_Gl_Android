@@ -35,6 +35,13 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
     List<VM> ListVM = new ArrayList<VM>();
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        ListVM.clear();
+        new AsyncLogin().execute();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
@@ -53,7 +60,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
         token = pref.getString("token","");
         //System.out.println("Token : " + token);
 
-        new AsyncLogin().execute();
+        //new AsyncLogin().execute(); //A decommenter si on enleve la fonction onResume
 
         //Gestion de la Listview
         VMAdapter adapter = new VMAdapter(this,ListVM);
@@ -301,7 +308,7 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
                 VMAdapter adapter = new VMAdapter(ListActivity.this,ListVM);
                 mListView.setAdapter(adapter);
 
-                Toast.makeText(ListActivity.this, "Liste actualisée", Toast.LENGTH_LONG).show();
+                Toast.makeText(ListActivity.this, "Liste actualisée", Toast.LENGTH_SHORT).show();
 
             }else if (result.equalsIgnoreCase("unsuccessful")){
 

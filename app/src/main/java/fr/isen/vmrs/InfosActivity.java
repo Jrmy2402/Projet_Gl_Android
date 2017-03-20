@@ -201,6 +201,7 @@ public class InfosActivity extends AppCompatActivity {
             Space4.setVisibility(View.GONE);
         }
 */
+        Toast.makeText(InfosActivity.this, "Chargement des informations ...", Toast.LENGTH_LONG).show();
 
         Back.setOnClickListener(new View.OnClickListener() {
 
@@ -292,16 +293,16 @@ public class InfosActivity extends AppCompatActivity {
                         if (!data.isNull("feedback")) {
                             JSONObject jsonFeedback = new JSONObject(data.getString("feedback"));
                             //System.out.println(jsonFeedback);
-                            if (jsonFeedback.getInt("cpu") != 0) {
-                                AffichCPU.setText(data.getString("cpu"));
-                                AffichCPU.setVisibility(View.VISIBLE);
-                                TagCPU.setVisibility(View.VISIBLE);
-                                Space7.setVisibility(View.VISIBLE);
-                            } else {
+                            //if (jsonFeedback.getInt("cpu") != 0) {
+                            AffichCPU.setText(jsonFeedback.getString("cpu"));
+                            AffichCPU.setVisibility(View.VISIBLE);
+                            TagCPU.setVisibility(View.VISIBLE);
+                            Space7.setVisibility(View.VISIBLE);
+                            /*} else {
                                 AffichCPU.setVisibility(View.GONE);
                                 TagCPU.setVisibility(View.GONE);
                                 Space7.setVisibility(View.GONE);
-                            }
+                            }*/
 
                             JSONObject jsonMemory = new JSONObject(jsonFeedback.getString("memory"));
                             if (!jsonMemory.getString("total").isEmpty()) {
@@ -354,6 +355,7 @@ public class InfosActivity extends AppCompatActivity {
                             Space8.setVisibility(View.GONE);
                             Space9.setVisibility(View.GONE);
                         }
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();

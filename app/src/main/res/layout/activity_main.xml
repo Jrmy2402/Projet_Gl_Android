@@ -26,6 +26,9 @@
         android:id="@+id/loginButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:textStyle="normal|bold"
+        android:background="@color/greenButton"
+        android:textColor="@color/colorWhite"
         android:layout_marginBottom="37dp" />
 
     <EditText

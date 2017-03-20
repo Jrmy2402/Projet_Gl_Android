@@ -199,7 +199,7 @@ public class MainActivity extends Activity {
                 System.out.println("Login et Pw OK");
                 Intent intent = new Intent(MainActivity.this,ListActivity.class);
                 startActivity(intent);
-                Toast.makeText(MainActivity.this, "Vous êtes connécté", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Vous êtes connécté", Toast.LENGTH_SHORT).show();
                 finish();
 
             }else if (result.equalsIgnoreCase("unsuccessful")){
